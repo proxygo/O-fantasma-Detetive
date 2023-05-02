@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert-One:wght@100;300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>O fantasma detetive</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <button id="audioButton">Ligar/Desligar Áudio</button>
+    <audio id="background-music" loop>
+        <source src="mystery.mp3" type="audio/mpeg">
+    </audio>
+
+</head>
+
+    <body onload="openModalInicial()">
+        
+        <!-- Modal Iniciar, ele aparece assim que carrega a pagina e ou da F5 -->
+        <div id="modalInicial" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalInicial()">&times;</span>
+                <h1>O Fantasma Detetive</h1>
+                <p>Em "O Fantasma Detetive", você joga como um fantasminha que percorre uma biblioteca antiga em busca de pistas que o levarão a um item perdido. 
+                Enquanto flutua pelo ambiente misterioso, o jogador deve encontrar e interagir com objetos para obter informações e resolver enigmas que ajudarão a desvendar o mistério.</p>
+                <p>comandos do jogo                       .....................<img src="comandos.png" alt="comandos do jogo" width="400" height="200"></p>
+
+                <br>
+            </div>
+        </div>
+
+        <!-- Conteúdo da página -->
+        <h1>O Fantasma Detetive</h1>
+        <p>voe pela biblioteca e ajude encontrar as pistas</p>
+        <br>
+
+        <button onclick="openModalAjuda()">Abrir Ajuda</button> <button id="btn-reiniciar">Reiniciar o jogo</button>
+        <br>
+        <br>
+        <form id="formResposta">
+            <label for="resposta">Qual é a resposta certa?</label>
+            <br>
+            <input type="text" id="resposta" name="resposta">
+            <br>
+            <button type="submit">Enviar</button>
+        </form>
+          
+
+        <!--Modal de Ajuda, só aparece quando aperta o botão "abrir ajuda"-->
+        <div id="modalAjuda" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalAjuda()">&times;</span>
+                <h1>Ajuda</h1>
+                <p>O objetivo do jogo é ajudar o Fantasma Detetive a encontrar os pistas escondidas na biblioteca. As pistas são necessárias para descobrir a resposta certa.
+                </p>
+                <ul>
+                    <li>Use a tecla ESPAÇO para frear o fantasma detetive</li>
+                    <li>Use as teclas de seta no teclado para mover o Fantasma Detetive pela biblioteca</li>
+                    <li>Procure por pistas ao redor da biblioteca. Quando você encontrar uma pista, pressione a tecla "Enter" para revelar ela</li>     
+                    <li>Algumas pistas podem levar a outras pistas. Continue procurando e interagindo com pistas até encontrar todos os itens necessários para resolver o mistério</li>
+                    <li>Cuidado com os obstáculos! Alguns objetos na biblioteca podem atrapalhar sua busca</li> 
+                    <li> Divirta-se e boa sorte!</li>
+                </ul>
+                
+            </div>
+        </div>
+
+        <div id="canvas-container">
+            <canvas id="canvas" width="1024" height="768">Se você visualizar esse texto, seu browser não suporta a tag canvas.</canvas>
+            <img src="library.png" width="1024" height="768" alt="Texto alternativo da imagem">
+            <div id="circle"></div>
+            <br>
+            <br>
+
+            <div><button id="btnModal">pista 1</button></div>
+
+            <div><button id="btnModal2">pista 2</button></div>
+
+            <div><button id="btnModal3">pista 3</button></div>
+
+            <div><button id="btnModal4">pista 4</button></div>
+            
+            <!-- Modal Pista, ele aparece quando se clica com o enter em cima dele -->
+            <div id="modalPista" class="modal" tabindex="0"> <!-- Nesse código específico, o tabindex foi adicionado 
+                na <div> do modal de pista (<div id="modalPista" class="modal" tabindex="0">), permitindo que 
+                    ele seja focado quando a tecla Tab for pressionada na página. Dessa forma, o usuário pode acessar o 
+                    modal de pista apenas usando o teclado.-->
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalPista()">&times;</span>
+                    <h1>Buuuuuh achei a pista 1</h1>
+                    <p>A pista 2 está numa estante, mas não é um livro</p>
+                </div>
+            </div>
+
+            <div id="modalPista2" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalPista2()">&times;</span>
+                    <h1>Fantasmas se divertem, achei a pista 2</h1>
+                    <p>A pista 3 está naquela coisa que ilumina a sala</p>
+                </div>
+            </div>
+
+            <div id="modalPista3" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalPista3()">&times;</span>
+                    <h1>Buh! Buh! Buh! eu sou muito bom, achei a pista 3</h1>
+                    <p>A pista 4 está protegida por espadas</p>
+                </div>
+            </div>
+
+            <div id="modalPista4" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalPista4()">&times;</span>
+                    <h1>Buuuuhbalacobaco, esse foi a ultima pista</h1>
+                    <p>A resposta certa é: 42
+                        (escreva a resposta certa no campo)
+                    </p>
+                </div>
+            </div>
+
+            <div id="modalRespostaCerta" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalRespostaCerta()">&times;</span>
+                    <h1>RESPOSTA CERTA</h1>
+                    <p>Parabens você encontrou todas as pistas e achou a resposta certa!
+                    </p>
+                </div>
+            </div>
+
+            <div id="modalRespostaErrada" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalRespostaErrada()">&times;</span>
+                    <h1>RESPOSTA ERRADA</h1>
+                    <p>Infelizmente você errou a resposta, tente novamente!
+                        Reinicie o Jogo
+                    </p>
+                </div>
+            </div>
+
+            <div id="modalBalao" class="modal"> 
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalBalao()">&times;</span>
+                    <h1>Buuuuuuuuuuuuuuh!</h1>
+                    <p>Acho que vi uma pista embaixo da cadeira, vou apertar enter em cima dela pra ver o que acontece.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal contador, ele aparece para finalizar o jogo -->
+        <div id="modalContador" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModalContador()">&times;</span>
+                <h1>Você perdeu</h1>
+                <p>Reinicie o jogo</p>
+                <button id="btn-reiniciar">Reiniciar o jogo</button>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="script.js"></script>
+<br>
+<br>
+
+        <footer>
+            <p>Desenvolvido por <a href="https://twitter.com/proxy_go">Proxy_go</a> ♥ </p>
+        </footer>
+         
+    </body>
+</html>
