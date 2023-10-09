@@ -1,4 +1,8 @@
-  function Iniciar() {
+// Global state of the game
+// It can be accessed across all the scripts and functions, and can store any data
+window.game = {};
+
+function Iniciar() {
     var dx = 0; // taxa de variação (velocidade) horizontal do objeto
     var dy = 0; // taxa de variação (velocidade) vertical do objeto
     var x = 150; // posição horizontal do objeto (com valor inicial)
@@ -141,8 +145,19 @@
         }
     }
 
-    window.addEventListener('keydown', KeyDown, true);
-    setInterval(Atualizar, 20);
+    // Start rendering and responding to controls
+    window.game.play = ()  => {
+        window.addEventListener('keydown', KeyDown, true);
+        window.game.rendering = setInterval(Atualizar, 20);
+    }
+
+    // Pause rendering and controls
+    window.game.pause = () => {
+        window.removeEventListener('keydown', KeyDown);
+        clearInterval(window.game.rendering);
+    }
+
+    window.game.play();
 }
 
 
@@ -189,9 +204,13 @@ Iniciar();
         modalPista.style.display = "block"; // Exibe a modal
         modalPista.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+        window.game.pause();
+
     }
     function closeModalPista() {
         modalPista.style.display = "none"; // Oculta a modal
+
+        window.game.play();
     }
 
 // esse é a logica que inventa o modal pista 2 na tela
@@ -201,9 +220,13 @@ Iniciar();
         modalPista2.style.display = "block"; // Exibe a modal
         modalPista2.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+        window.game.pause();
+
     }
     function closeModalPista2() {
         modalPista2.style.display = "none"; // Oculta a modal
+
+        window.game.play();
     }
 
 // esse é a logica que inventa o modal pista 3 na tela
@@ -213,9 +236,13 @@ Iniciar();
         modalPista3.style.display = "block"; // Exibe a modal
         modalPista3.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+        window.game.pause();
+
     }
     function closeModalPista3() {
         modalPista3.style.display = "none"; // Oculta a modal
+
+        window.game.play();
     }
 
 // esse é a logica que inventa o modal pista 4 na tela
@@ -225,9 +252,13 @@ Iniciar();
         modalPista4.style.display = "block"; // Exibe a modal
         modalPista4.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+        window.game.pause();
+
     }
     function closeModalPista4() {
         modalPista4.style.display = "none"; // Oculta a modal
+
+        window.game.play();
     }
 
 
@@ -239,9 +270,13 @@ Iniciar();
         modalContador.style.display = "block"; // Exibe a modal
         modalContador.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+        window.game.pause();
+
     }
     function closeModalContador() {
         modalContador.style.display = "none"; // Oculta a modal
+
+        window.game.play();
     }
 
 // esse é a logica que inventa o modal do form de resposta certa
@@ -251,9 +286,12 @@ function openModalRespostaCerta() {
     modalRespostaCerta.style.display = "block"; // Exibe a modal
     modalRespostaCerta.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+    window.game.pause();
 }
 function closeModalRespostaCerta() {
     modalRespostaCerta.style.display = "none"; // Oculta a modal
+
+    window.game.play();
 }
 
 // esse é a logica que inventa o modal do form de resposta certa
@@ -263,9 +301,13 @@ function openModalRespostaErrada() {
     modalRespostaErrada.style.display = "block"; // Exibe a modal
     modalRespostaErrada.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+    window.game.pause();
+
 }
 function closeModalRespostaErrada() {
     modalRespostaErrada.style.display = "none"; // Oculta a modal
+
+    window.game.play();
 }
 
 
@@ -276,10 +318,13 @@ function openModalBalao() {
     modalBalao.style.display = "block"; // Exibe a modal
     modalBalao.focus(); // Set o focus na div da modal para permitir o evento de teclado
 
+    window.game.pause();
 }
 function closeModalBalao() {
     modalBalao.style.display = "none"; // Oculta a modal
     document.removeEventListener("keydown" ,  balao)
+
+    window.game.play();
 }
 // Detecta o evento de teclado
 document.addEventListener("keydown",  balao);
