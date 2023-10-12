@@ -18,6 +18,7 @@
     <body onload="openModalInicial()">
         
         <!-- Modal Iniciar, ele aparece assim que carrega a pagina e ou da F5 -->
+        
         <div id="modalInicial" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModalInicial()">&times;</span>
@@ -29,6 +30,22 @@
                 <br>
             </div>
         </div>
+         <div id="google_translate_element" style="float: right;"></div> 
+ 
+  <script type="text/javascript">
+     function googleTranslateElementInit() {
+         new google.translate.TranslateElement(
+             {pageLanguage: 'en'},
+             'google_translate_element'
+         );
+     }
+ </script>
+
+ <script type="text/javascript"
+         src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+ </script>
 
         <!-- Conteúdo da página -->
         <h1>O Fantasma Detetive</h1>
